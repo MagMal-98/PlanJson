@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +36,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,8 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < weekDays.size(); i++) {
             Bundle bundle = new Bundle();
             switch (i) {
-                case 0: {
-                    restoreFromJson();
+                case 0: { restoreFromJson();
                     bundle.putString("title", String.valueOf(list));
                     break;
                 }
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             inputStream.read(buffer);
             inputStream.close();
 
-            json = new String(buffer, "UTF-8");
+            json = new String(buffer, StandardCharsets.UTF_8);
 
 //            Type courseType = new TypeToken<ArrayList<Schedule>>() {
 //            }.getType();
@@ -184,10 +185,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                list.add("Error");
 //            } else list.add(courses1.toString());
 
+            //Type courseType = new TypeToken<ArrayList<Courses>>() {
+            //}.getType();
+           // List<Courses> courses1 =  gson.fromJson(json, courseType);
+            //ArrayList<Courses> courses1 = gson.fromJson(json, courseType);
+            //JsonReader reader = new JsonReader(new FileReader("/Users/magmal/AndroidStudioProjects/PlanJson/app/src/main/assets/teleinf_sem_V.json"));
             Courses courses = gson.fromJson(json, Courses.class);
             if(courses == null){
                 list.add("Error");
-            } else list.add(courses.getName());
+            } else list.add(courses.toString());
 
 
         } catch (IOException ex) {
