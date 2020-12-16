@@ -89,10 +89,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle bundle = new Bundle();
             switch (i) {
                 case 0: {
-//                    String data = getAssetJsonData(getApplicationContext());
-//                    Type courseType = new TypeToken<ArrayList<Schedule>>() {
-//                    }.getType();
-//                    Schedule courses1 = new Gson().fromJson(data, courseType);
                     restoreFromJson();
                     bundle.putString("title", String.valueOf(list));
                     break;
@@ -168,10 +164,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     public void restoreFromJson() {
-        //FileInputStream inputStream;
         Gson gson = new Gson();
         String json;
-        Courses courses;
+        Plan plan;
 
         try {
             InputStream inputStream = getAssets().open("teleinf_sem_V.json");
@@ -181,26 +176,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             inputStream.close();
 
             json = new String(buffer, "UTF-8");
-            JSONArray jsonArray = new JSONArray(json);
 
-            for (int i=0; i<jsonArray.length(); i++){
-//                JSONObject obj = jsonArray.getJSONObject(i);
-//                if(obj.getString("day").equals("1")){
-//                    list.add(obj.getString("name"));
-//                }
-                courses = gson.fromJson(json, Courses.class);
-                if (courses.toString().isEmpty()){
-                    list.add("Error");
-                }else list.add(courses.toString());
-            }
-            Type courseType = new TypeToken<ArrayList<Schedule>>() {
-            }.getType();
-            ArrayList<Schedule> courses1 = gson.fromJson(json, courseType);
-            if (courses1.isEmpty()) {
+//            Type courseType = new TypeToken<ArrayList<Schedule>>() {
+//            }.getType();
+//            ArrayList<Schedule> courses1 = gson.fromJson(json, courseType);
+//            if (courses1.isEmpty()) {
+//                list.add("Error");
+//            } else list.add(courses1.toString());
+
+            Courses courses = gson.fromJson(json, Courses.class);
+            if(courses == null){
                 list.add("Error");
-            } else list.add(courses1.toString());
+            } else list.add(courses.getName());
 
-        } catch (IOException | JSONException ex) {
+
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
         list.add("Merry christmas");
