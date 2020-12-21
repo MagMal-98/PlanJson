@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-public class Classes implements Serializable, Parcelable
+public class Lessons implements Serializable, Parcelable
 {
 
     @SerializedName("type")
@@ -27,25 +27,25 @@ public class Classes implements Serializable, Parcelable
     @SerializedName("schedule")
     @Expose
     private List<Schedule> schedule = null;
-    public final static Parcelable.Creator<Classes> CREATOR = new Creator<Classes>() {
+    public final static Parcelable.Creator<Lessons> CREATOR = new Creator<Lessons>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public Classes createFromParcel(Parcel in) {
-            return new Classes(in);
+        public Lessons createFromParcel(Parcel in) {
+            return new Lessons(in);
         }
 
-        public Classes[] newArray(int size) {
-            return (new Classes[size]);
+        public Lessons[] newArray(int size) {
+            return (new Lessons[size]);
         }
 
     }
             ;
     private final static long serialVersionUID = -4916457578812788858L;
 
-    protected Classes(Parcel in) {
+    protected Lessons(Parcel in) {
         this.type = ((String) in.readValue((String.class.getClassLoader())));
         this.room = ((String) in.readValue((String.class.getClassLoader())));
         this.supervisor = ((String) in.readValue((String.class.getClassLoader())));
@@ -56,7 +56,7 @@ public class Classes implements Serializable, Parcelable
      * No args constructor for use in serialization
      *
      */
-    public Classes() {
+    public Lessons() {
     }
 
     /**
@@ -66,7 +66,7 @@ public class Classes implements Serializable, Parcelable
      * @param room
      * @param supervisor
      */
-    public Classes(String type, String room, String supervisor, List<Schedule> schedule) {
+    public Lessons(String type, String room, String supervisor, List<Schedule> schedule) {
         super();
         this.type = type;
         this.room = room;
@@ -123,24 +123,3 @@ public class Classes implements Serializable, Parcelable
     }
 
 }
-
-
-
-//package com.mm.planjson;
-//
-//import java.util.List;
-//
-//public class Classes {
-//
-//    private String type;
-//    private String room;
-//    private String supervisor;
-//    private List <Schedule> schedule;
-//
-//    public Classes(String type, String room, String supervisor, List<Schedule> schedule) {
-//        this.type = type;
-//        this.room = room;
-//        this.supervisor = supervisor;
-//        this.schedule = schedule;
-//    }
-//}

@@ -20,7 +20,7 @@ public class Courses implements Serializable, Parcelable
     private String name;
     @SerializedName("classes")
     @Expose
-    private List<Classes> classes = null;
+    private List<Lessons> aClasses = null;
     public final static Parcelable.Creator<Courses> CREATOR = new Creator<Courses>() {
 
 
@@ -41,7 +41,7 @@ public class Courses implements Serializable, Parcelable
 
     protected Courses(Parcel in) {
         this.name = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.classes, (Classes.class.getClassLoader()));
+        in.readList(this.aClasses, (Lessons.class.getClassLoader()));
     }
 
     /**
@@ -53,13 +53,13 @@ public class Courses implements Serializable, Parcelable
 
     /**
      *
-     * @param classes
+     * @param aClasses
      * @param name
      */
-    public Courses(String name, List<Classes> classes) {
+    public Courses(String name, List<Lessons> aClasses) {
         super();
         this.name = name;
-        this.classes = classes;
+        this.aClasses = aClasses;
     }
 
     public String getName() {
@@ -70,22 +70,22 @@ public class Courses implements Serializable, Parcelable
         this.name = name;
     }
 
-    public List<Classes> getClasses() {
-        return classes;
+    public List<Lessons> getaClasses() {
+        return aClasses;
     }
 
-    public void setClasses(List<Classes> classes) {
-        this.classes = classes;
+    public void setaClasses(List<Lessons> aClasses) {
+        this.aClasses = aClasses;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("name", name).append("classes", classes).toString();
+        return new ToStringBuilder(this).append("name", name).append("classes", aClasses).toString();
     }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(name);
-        dest.writeList(classes);
+        dest.writeList(aClasses);
     }
 
     public int describeContents() {
@@ -94,18 +94,3 @@ public class Courses implements Serializable, Parcelable
 
 }
 
-
-//package com.mm.planjson;
-//
-//import java.util.List;
-//
-//public class Courses {
-//
-//    private String name;
-//    List<Classes> classes;
-//
-//    public Courses(String name, List<Classes> classes) {
-//        this.name = name;
-//        this.classes = classes;
-//    }
-//}

@@ -7,15 +7,8 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 
 public class ReadJson {
 
@@ -51,31 +44,31 @@ public class ReadJson {
             Courses coursesSSO = plan.getCourses().get(5);
             Courses coursesPM = plan.getCourses().get(6);
 
-            Classes MOIWSPLecture = coursesMOIWSP.getClasses().get(0);
-            Classes MOIWSPLab = coursesMOIWSP.getClasses().get(1);
+            Lessons MOIWSPLecture = coursesMOIWSP.getaClasses().get(0);
+            Lessons MOIWSPLab = coursesMOIWSP.getaClasses().get(1);
 
-            Classes BDLecture = coursesBD.getClasses().get(0);
-            Classes BDLab1 = coursesBD.getClasses().get(1);
-            Classes BDLab2 = coursesBD.getClasses().get(2);
+            Lessons BDLecture = coursesBD.getaClasses().get(0);
+            Lessons BDLab1 = coursesBD.getaClasses().get(1);
+            Lessons BDLab2 = coursesBD.getaClasses().get(2);
 
-            Classes WDMLecture = coursesWDM.getClasses().get(0);
-            Classes WDMLab1 = coursesWDM.getClasses().get(1);
-            Classes WDMLab2 = coursesWDM.getClasses().get(2);
-            Classes WDMLab3 = coursesWDM.getClasses().get(3);
+            Lessons WDMLecture = coursesWDM.getaClasses().get(0);
+            Lessons WDMLab1 = coursesWDM.getaClasses().get(1);
+            Lessons WDMLab2 = coursesWDM.getaClasses().get(2);
+            Lessons WDMLab3 = coursesWDM.getaClasses().get(3);
 
-            Classes BSDLecture = coursesBSD.getClasses().get(0);
-            Classes BSDLab1 = coursesBSD.getClasses().get(1);
-            Classes BSDLab2 = coursesBSD.getClasses().get(2);
+            Lessons BSDLecture = coursesBSD.getaClasses().get(0);
+            Lessons BSDLab1 = coursesBSD.getaClasses().get(1);
+            Lessons BSDLab2 = coursesBSD.getaClasses().get(2);
 
-            Classes SSIZLecture = coursesSSIZ.getClasses().get(0);
-            Classes SSIZLab = coursesSSIZ.getClasses().get(1);
+            Lessons SSIZLecture = coursesSSIZ.getaClasses().get(0);
+            Lessons SSIZLab = coursesSSIZ.getaClasses().get(1);
 
-            Classes SSOLecture = coursesSSO.getClasses().get(0);
-            Classes SSOLab = coursesSSO.getClasses().get(1);
+            Lessons SSOLecture = coursesSSO.getaClasses().get(0);
+            Lessons SSOLab = coursesSSO.getaClasses().get(1);
 
-            Classes PMLecture = coursesPM.getClasses().get(0);
-            Classes PMLab1 = coursesPM.getClasses().get(1);
-            Classes PMLab2 = coursesPM.getClasses().get(2);
+            Lessons PMLecture = coursesPM.getaClasses().get(0);
+            Lessons PMLab1 = coursesPM.getaClasses().get(1);
+            Lessons PMLab2 = coursesPM.getaClasses().get(2);
 
             Schedule MOIWSPLectureS = MOIWSPLecture.getSchedule().get(0);
             Schedule MOIWSPLabS1 = MOIWSPLab.getSchedule().get(0);

@@ -1,12 +1,10 @@
 package com.mm.planjson;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.MenuItem;
 import android.widget.Toast;
-//import android.widget.Toolbar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,27 +16,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,12 +29,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
-    private RecyclerView mRecyclerView;
-    public RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-    ArrayList<String> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,17 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         prepareViewPager(viewPager, weekDays);
         tabLayout.setupWithViewPager(viewPager);
 
-//        ReadJson read = new ReadJson(getApplicationContext());
-//        read.restoreFromJson();
-//
-//        //recycler view
-//        mRecyclerView = findViewById(R.id.recycler_view_plan);
-//        mRecyclerView.setHasFixedSize(true);
-//        mLayoutManager = new LinearLayoutManager(this);
-//        mAdapter = new PlanAdapter(read.restoreFromJson());
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setAdapter(mAdapter);
-
     }
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> weekDays) {
@@ -108,34 +74,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle bundle = new Bundle();
             switch (i) {
                 case 0: {
-//                    ReadJson read = new ReadJson(getApplicationContext());
-//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "right"));
-
                     bundle.putString("adapter", "0");
                     break;
                 }
                 case 1: {
                     bundle.putString("adapter", "1");
-//                    ReadJson read = new ReadJson(getApplicationContext());
-//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "left"));
                     break;
                 }
                 case 2: {
                     bundle.putString("adapter", "2");
-//                    ReadJson read = new ReadJson(getApplicationContext());
-//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I2", "right"));
                     break;
                 }
                 case 3: {
                     bundle.putString("adapter", "3");
-//                    ReadJson read = new ReadJson(getApplicationContext());
-//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I3", "right"));
                     break;
                 }
                 case 4: {
                     bundle.putString("adapter", "4");
-//                    ReadJson read = new ReadJson(getApplicationContext());
-//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I3", "left"));
                     break;
                 }
             }
@@ -144,10 +99,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragment = new DayOfWeekFragment();
         }
         viewPager.setAdapter(adapter);
-    }
-
-    private String viewString() {
-        return "abcde";
     }
 
     @Override
