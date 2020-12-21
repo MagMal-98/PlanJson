@@ -108,26 +108,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Bundle bundle = new Bundle();
             switch (i) {
                 case 0: {
-                    ReadJson read = new ReadJson(getApplicationContext());
-                    //mAdapter = new PlanAdapter(read.restoreFromJson());
+//                    ReadJson read = new ReadJson(getApplicationContext());
+//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "right"));
 
-                    adapter = new ViewPagerAdapter(read.restoreFromJson());
+                    //bundle.putString("adapter", String.valueOf(mAdapter));
                     break;
                 }
                 case 1: {
                     bundle.putString("title", viewString());
+//                    ReadJson read = new ReadJson(getApplicationContext());
+//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "left"));
                     break;
                 }
                 case 2: {
                     bundle.putString("title", "loa2222dJSONFromAsset()");
+//                    ReadJson read = new ReadJson(getApplicationContext());
+//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I2", "right"));
                     break;
                 }
                 case 3: {
                     bundle.putString("title", "33333");
+//                    ReadJson read = new ReadJson(getApplicationContext());
+//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I3", "right"));
                     break;
                 }
                 case 4: {
                     bundle.putString("title", "l4444");
+//                    ReadJson read = new ReadJson(getApplicationContext());
+//                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I3", "left"));
                     break;
                 }
             }
@@ -147,8 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent;
         switch (item.getItemId()) {
             case R.id.nav_message:
-                intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
                 break;
             case R.id.nav_chat:
 

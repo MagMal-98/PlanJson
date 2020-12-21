@@ -23,12 +23,14 @@ public class DayOfWeekFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_day_of_week, container, false);
 
         ReadJson read = new ReadJson(getActivity().getApplicationContext());
+        //MainActivity mainActivity = new MainActivity();
 
         recyclerView = v.findViewById(R.id.recycler_view_plan);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //recyclerView.setAdapter(mainActivity.mAdapter);
         recyclerView.setAdapter(mAdapter);
-        mAdapter = new PlanAdapter(read.restoreFromJson());
+        mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "right"));
 
         return v;
     }

@@ -27,7 +27,7 @@ public class ReadJson {
         this.context = context;
     }
 
-    public ArrayList<PlanItem> restoreFromJson() {
+    public ArrayList<PlanItem> restoreFromJson(int day, String group, String subgroup) {
         Gson gson = new Gson();
         String json;
         Plan plan;
@@ -140,7 +140,7 @@ public class ReadJson {
             I1rightMon.add(new PlanItem(SSOLabS6.getStartTime(), coursesSSO.getName(), SSOLab.getSupervisor(), SSOLab.getRoom(), SSOLabS6.getDay(), SSOLabS6.getGroup(), SSOLabS6.getSubgroup(), SSOLabS6.getWeeks()));
 
             for (int i=0; i<I1rightMon.size(); i++){
-                if((I1rightMon.get(i).getGroup().equals("I1") && (I1rightMon.get(i).getSubgroup().equals("right"))) || (I1rightMon.get(i).getGroup().equals("all") && (I1rightMon.get(i).getSubgroup().equals("all")))){
+                if((I1rightMon.get(i).getGroup().equals(group) && (I1rightMon.get(i).getSubgroup().equals(subgroup))) || (I1rightMon.get(i).getGroup().equals("all") && (I1rightMon.get(i).getSubgroup().equals("all")))){
                     tmp.add(I1rightMon.get(i));
                 }
             }
