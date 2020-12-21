@@ -7,12 +7,21 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class ReadJson {
 
     private Context context;
-    ArrayList<PlanItem> planList = new ArrayList<>();
+    ArrayList<PlanItem> I1rightMon = new ArrayList<>();
+    ArrayList<PlanItem> tmp = new ArrayList<>();
 
     public ReadJson(Context context) {
         this.context = context;
@@ -124,11 +133,26 @@ public class ReadJson {
             Schedule PMLab2S2 = PMLab2.getSchedule().get(1);
             Schedule PMLab2S3 = PMLab2.getSchedule().get(2);
 
-            planList.add(new PlanItem(MOIWSPLectureS.getStartTime(), coursesMOIWSP.getName(), MOIWSPLecture.getSupervisor(), MOIWSPLecture.getRoom()));
-            return planList;
+            I1rightMon.add(new PlanItem(MOIWSPLectureS.getStartTime(), coursesMOIWSP.getName(), MOIWSPLecture.getSupervisor(), MOIWSPLecture.getRoom(), MOIWSPLectureS.getDay(), MOIWSPLectureS.getGroup(), MOIWSPLectureS.getSubgroup(), MOIWSPLectureS.getWeeks()));
+            I1rightMon.add(new PlanItem(MOIWSPLabS1.getStartTime(), coursesMOIWSP.getName(), MOIWSPLab.getSupervisor(), MOIWSPLab.getRoom(), MOIWSPLabS1.getDay(), MOIWSPLabS1.getGroup(), MOIWSPLabS1.getSubgroup(), MOIWSPLabS1.getWeeks()));
+            I1rightMon.add(new PlanItem(BDLectureS.getStartTime(), coursesBD.getName(), BDLecture.getSupervisor(), BDLecture.getRoom(), BDLectureS.getDay(), BDLectureS.getGroup(), BDLectureS.getSubgroup(), BDLectureS.getWeeks()));
+            I1rightMon.add(new PlanItem(PMLab1S1.getStartTime(), coursesPM.getName(), PMLab1.getSupervisor(), PMLab1.getRoom(), PMLab1S1.getDay(), PMLab1S1.getGroup(), PMLab1S1.getSubgroup(), PMLab1S1.getWeeks()));
+            I1rightMon.add(new PlanItem(SSOLabS6.getStartTime(), coursesSSO.getName(), SSOLab.getSupervisor(), SSOLab.getRoom(), SSOLabS6.getDay(), SSOLabS6.getGroup(), SSOLabS6.getSubgroup(), SSOLabS6.getWeeks()));
+
+            for (int i=0; i<I1rightMon.size(); i++){
+                if((I1rightMon.get(i).getGroup().equals("I1") && (I1rightMon.get(i).getSubgroup().equals("right"))) || (I1rightMon.get(i).getGroup().equals("all") && (I1rightMon.get(i).getSubgroup().equals("all")))){
+                    tmp.add(I1rightMon.get(i));
+                }
+            }
+
+            Collections.sort(tmp, PlanItem.StuNameComparator);
+
+            return tmp;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         return null;
     }
+
+
 }

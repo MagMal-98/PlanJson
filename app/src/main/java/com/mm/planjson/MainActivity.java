@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TabLayout tabLayout;
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    public RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     ArrayList<String> list = new ArrayList<>();
@@ -109,8 +109,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             switch (i) {
                 case 0: {
                     ReadJson read = new ReadJson(getApplicationContext());
-                    //read.restoreFromJson();
-                    //bundle.putString("title", String.valueOf(read.restoreFromJson()));
+                    //mAdapter = new PlanAdapter(read.restoreFromJson());
+
+                    adapter = new ViewPagerAdapter(read.restoreFromJson());
                     break;
                 }
                 case 1: {
