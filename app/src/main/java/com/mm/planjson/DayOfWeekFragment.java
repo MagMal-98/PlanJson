@@ -21,6 +21,7 @@ public class DayOfWeekFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_day_of_week, container, false);
+        Bundle bundle = this.getArguments();
 
         ReadJson read = new ReadJson(getActivity().getApplicationContext());
         //MainActivity mainActivity = new MainActivity();
@@ -29,8 +30,40 @@ public class DayOfWeekFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         //recyclerView.setAdapter(mainActivity.mAdapter);
-        recyclerView.setAdapter(mAdapter);
-        mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "right"));
+        if(bundle != null){
+            String adapter = bundle.getString("adapter");
+            switch (adapter) {
+                case "0": {
+                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "right"));
+                    recyclerView.setAdapter(mAdapter);
+                    break;
+                }
+                case "1": {
+                    mAdapter = new PlanAdapter(read.restoreFromJson(2, "I2", "right"));
+                    recyclerView.setAdapter(mAdapter);
+
+                    break;
+                }
+                case "2": {
+                    mAdapter = new PlanAdapter(read.restoreFromJson(3, "I3", "right"));
+                    recyclerView.setAdapter(mAdapter);
+
+                    break;
+                }
+                case "3": {
+                    mAdapter = new PlanAdapter(read.restoreFromJson(4, "I1", "left"));
+                    recyclerView.setAdapter(mAdapter);
+
+                    break;
+                }
+                case "4": {
+                    mAdapter = new PlanAdapter(read.restoreFromJson(5, "I2", "left"));
+                    recyclerView.setAdapter(mAdapter);
+
+                    break;
+                }
+            }
+        }
 
         return v;
     }

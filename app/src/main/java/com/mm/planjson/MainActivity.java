@@ -111,29 +111,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    ReadJson read = new ReadJson(getApplicationContext());
 //                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "right"));
 
-                    //bundle.putString("adapter", String.valueOf(mAdapter));
+                    bundle.putString("adapter", "0");
                     break;
                 }
                 case 1: {
-                    bundle.putString("title", viewString());
+                    bundle.putString("adapter", "1");
 //                    ReadJson read = new ReadJson(getApplicationContext());
 //                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "left"));
                     break;
                 }
                 case 2: {
-                    bundle.putString("title", "loa2222dJSONFromAsset()");
+                    bundle.putString("adapter", "2");
 //                    ReadJson read = new ReadJson(getApplicationContext());
 //                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I2", "right"));
                     break;
                 }
                 case 3: {
-                    bundle.putString("title", "33333");
+                    bundle.putString("adapter", "3");
 //                    ReadJson read = new ReadJson(getApplicationContext());
 //                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I3", "right"));
                     break;
                 }
                 case 4: {
-                    bundle.putString("title", "l4444");
+                    bundle.putString("adapter", "4");
 //                    ReadJson read = new ReadJson(getApplicationContext());
 //                    mAdapter = new PlanAdapter(read.restoreFromJson(1, "I3", "left"));
                     break;
