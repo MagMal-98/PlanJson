@@ -18,6 +18,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.navigation.NavigationView;
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     ArrayList<String> list = new ArrayList<>();
 
@@ -81,6 +87,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         prepareViewPager(viewPager, weekDays);
         tabLayout.setupWithViewPager(viewPager);
 
+//        ReadJson read = new ReadJson(getApplicationContext());
+//        read.restoreFromJson();
+//
+//        //recycler view
+//        mRecyclerView = findViewById(R.id.recycler_view_plan);
+//        mRecyclerView.setHasFixedSize(true);
+//        mLayoutManager = new LinearLayoutManager(this);
+//        mAdapter = new PlanAdapter(read.restoreFromJson());
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.setAdapter(mAdapter);
+
     }
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> weekDays) {
@@ -90,8 +107,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         for (int i = 0; i < weekDays.size(); i++) {
             Bundle bundle = new Bundle();
             switch (i) {
-                case 0: { restoreFromJson();
-                    bundle.putString("title", String.valueOf(list));
+                case 0: {
+                    ReadJson read = new ReadJson(getApplicationContext());
+                    //read.restoreFromJson();
+                    //bundle.putString("title", String.valueOf(read.restoreFromJson()));
                     break;
                 }
                 case 1: {
@@ -162,62 +181,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
-
-    public void restoreFromJson() {
-        Gson gson = new Gson();
-        String json;
-        Plan plan;
-
-        try {
-            InputStream inputStream = getAssets().open("teleinf_sem_V.json");
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-
-            json = new String(buffer, StandardCharsets.UTF_8);
-
-//            Type courseType = new TypeToken<ArrayList<Schedule>>() {
-//            }.getType();
-//            ArrayList<Schedule> courses1 = gson.fromJson(json, courseType);
-//            if (courses1.isEmpty()) {
-//                list.add("Error");
-//            } else list.add(courses1.toString());
-
-            //Type courseType = new TypeToken<ArrayList<Courses>>() {
-            //}.getType();
-           // List<Courses> courses1 =  gson.fromJson(json, courseType);
-            //ArrayList<Courses> courses1 = gson.fromJson(json, courseType);
-            //JsonReader reader = new JsonReader(new FileReader("/Users/magmal/AndroidStudioProjects/PlanJson/app/src/main/assets/teleinf_sem_V.json"));
-            Courses courses = gson.fromJson(json, Courses.class);
-            if(courses == null){
-                list.add("Error");
-            } else list.add(courses.toString());
-
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        list.add("Merry christmas");
-    }
-
-    public String getAssetJsonData(Context context) {
-        String json;
-        try {
-            InputStream is = context.getAssets().open("teleinf_sem_V.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
-
 
     private class ViewPagerAdapter extends FragmentPagerAdapter {
 
