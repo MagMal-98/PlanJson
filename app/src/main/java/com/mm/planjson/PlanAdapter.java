@@ -56,3 +56,6 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanViewHolder
         return mPlanList.size();
     }
 }
+
+
+

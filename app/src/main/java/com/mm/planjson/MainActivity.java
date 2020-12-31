@@ -36,6 +36,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         setTitle("Current schedule");
 
+        //start another activity only once after install
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
+        if (isFirstRun) {
+            //show sign up activity
+            startActivity(new Intent(MainActivity.this, FirstStartActivity.class));
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun", false).apply();
+        }
+
         //navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         prepareViewPager(viewPager, weekDays);
         tabLayout.setupWithViewPager(viewPager);
+
 
     }
 
@@ -94,7 +106,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 }
             }
+            //String data = getIntent().getStringExtra("user_plan");
+            //Bundle bundle1 = new Bundle();
             fragment.setArguments(bundle);
+            //fragment.setArguments(bundle1);
             adapter.addFragment(fragment, weekDays.get(i));
             fragment = new DayOfWeekFragment();
         }

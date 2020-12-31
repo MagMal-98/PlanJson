@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 public class DayOfWeekFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -21,6 +23,7 @@ public class DayOfWeekFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_day_of_week, container, false);
 
         Bundle bundle = this.getArguments();
+        //Bundle bundle1 = this.getArguments();
         ReadJson read = new ReadJson(getActivity().getApplicationContext());
 
         recyclerView = v.findViewById(R.id.recycler_view_plan);
@@ -28,6 +31,7 @@ public class DayOfWeekFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         if(bundle != null){
             String adapter = bundle.getString("adapter");
+            //ArrayList<String> user_choice = bundle1.getStringArrayList("user_plan");
             switch (adapter) {
                 case "0": {
                     mAdapter = new PlanAdapter(read.restoreFromJson(1, "I1", "right"));
@@ -35,22 +39,22 @@ public class DayOfWeekFragment extends Fragment {
                     break;
                 }
                 case "1": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(2, "I2", "right"));
+                    mAdapter = new PlanAdapter(read.restoreFromJson(2, "I1", "right"));
                     recyclerView.setAdapter(mAdapter);
                     break;
                 }
                 case "2": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(3, "I3", "right"));
+                    mAdapter = new PlanAdapter(read.restoreFromJson(3, "I1", "right"));
                     recyclerView.setAdapter(mAdapter);
                     break;
                 }
                 case "3": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(4, "I1", "left"));
+                    mAdapter = new PlanAdapter(read.restoreFromJson(4, "I1", "right"));
                     recyclerView.setAdapter(mAdapter);
                     break;
                 }
                 case "4": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(5, "I2", "left"));
+                    mAdapter = new PlanAdapter(read.restoreFromJson(5, "I1", "right"));
                     recyclerView.setAdapter(mAdapter);
                     break;
                 }
