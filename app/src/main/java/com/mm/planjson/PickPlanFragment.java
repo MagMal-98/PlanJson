@@ -1,6 +1,8 @@
 package com.mm.planjson;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,7 +19,23 @@ import java.util.ArrayList;
 
 public class PickPlanFragment extends Fragment {
 
-    //ArrayList<String> spinners_choose = new ArrayList<>();
+//    public interface onSomeEventListener {
+//        public void someEvent(ArrayList<String> arrayList);
+//    }
+//
+//    onSomeEventListener someEventListener;
+//
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        try {
+//            someEventListener = (onSomeEventListener) activity;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
+//        }
+//    }
+
+    ArrayList<String> spinners_choose = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,8 +58,11 @@ public class PickPlanFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
-                String item = adapterView.getItemAtPosition(position).toString();
-                //spinners_choose.add(item);
+                Object item = adapterView.getItemAtPosition(position);
+                if(item != null) {
+                    String s = item.toString();
+                    spinners_choose.add(s);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -62,7 +83,10 @@ public class PickPlanFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
                 Object item = adapterView.getItemAtPosition(position);
-                //spinners_choose.add(item.toString());
+                if(item != null) {
+                    String s = item.toString();
+                    spinners_choose.add(s);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -83,7 +107,10 @@ public class PickPlanFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
                 Object item = adapterView.getItemAtPosition(position);
-               // spinners_choose.add(item.toString());
+                if(item != null) {
+                    String s = item.toString();
+                    spinners_choose.add(s);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -103,7 +130,10 @@ public class PickPlanFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
                 Object item = adapterView.getItemAtPosition(position);
-               // spinners_choose.add(item.toString());
+                if(item != null) {
+                    String s = item.toString();
+                    spinners_choose.add(s);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -123,7 +153,10 @@ public class PickPlanFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
                 Object item = adapterView.getItemAtPosition(position);
-               // spinners_choose.add(item.toString());
+                if(item != null) {
+                    String s = item.toString();
+                    spinners_choose.add(s);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -136,49 +169,19 @@ public class PickPlanFragment extends Fragment {
                         getActivity().getApplicationContext()));
 
 
-//        Button button_add_plan = v.findViewById(R.id.add_plan_button);
-//        button_add_plan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), MainActivity.class);
-//                intent.putExtra("user_plan", spinners_choose);
-//                startActivity(intent);
-//            }
-//        });
+        Button button_add_plan = v.findViewById(R.id.add_plan_button);
+        button_add_plan.setOnClickListener(v1 -> {
+
+            DayOfWeekFragment dayOfWeekFragment = new DayOfWeekFragment ();
+            Bundle bundle1 = new Bundle();
+            bundle1.putStringArrayList("user_plan", spinners_choose);
+            //dayOfWeekFragment.setArguments(bundle1);
+            getFragmentManager().beginTransaction().add(R.id.container, dayOfWeekFragment).commit();
+            //someEventListener.someEvent(spinners_choose);
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+        });
 
         return v;
     }
-
-//    @SuppressLint("NonConstantResourceId")
-//    @Override
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        String text;
-//        switch(parent.getId()){
-//            case R.id.department_spinner:{
-//                text = parent.getItemAtPosition(position).toString();
-//                spinners_choose.add(text);
-//            }
-//            case R.id.field_of_study_spinner:{
-//                text = parent.getItemAtPosition(position).toString();
-//                spinners_choose.add(text);
-//            }
-//            case R.id.semester_spinner:{
-//                text = parent.getItemAtPosition(position).toString();
-//                spinners_choose.add(text);
-//            }
-//            case R.id.group_spinner:{
-//                text = parent.getItemAtPosition(position).toString();
-//                spinners_choose.add(text);
-//            }
-//            case R.id.subgroup_spinner:{
-//                text = parent.getItemAtPosition(position).toString();
-//                spinners_choose.add(text);
-//            }
-//        }
-//    }
-//
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }parent
 }

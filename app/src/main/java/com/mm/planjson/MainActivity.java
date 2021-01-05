@@ -106,10 +106,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     break;
                 }
             }
-            //String data = getIntent().getStringExtra("user_plan");
-            //Bundle bundle1 = new Bundle();
             fragment.setArguments(bundle);
-            //fragment.setArguments(bundle1);
             adapter.addFragment(fragment, weekDays.get(i));
             fragment = new DayOfWeekFragment();
         }
