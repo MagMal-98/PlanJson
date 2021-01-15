@@ -3,6 +3,7 @@ package com.mm.planjson;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,11 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class PickPlanFragment extends Fragment {
 
@@ -35,7 +41,7 @@ public class PickPlanFragment extends Fragment {
 //        }
 //    }
 
-    ArrayList<String> spinners_choose = new ArrayList<>();
+    HashMap<String,String> spinners_choose = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +67,8 @@ public class PickPlanFragment extends Fragment {
                 Object item = adapterView.getItemAtPosition(position);
                 if(item != null) {
                     String s = item.toString();
-                    spinners_choose.add(s);
+                    spinners_choose.put("department",s);
+
                 }
             }
             @Override
@@ -85,7 +92,7 @@ public class PickPlanFragment extends Fragment {
                 Object item = adapterView.getItemAtPosition(position);
                 if(item != null) {
                     String s = item.toString();
-                    spinners_choose.add(s);
+                    spinners_choose.put("field",s);
                 }
             }
             @Override
@@ -109,7 +116,7 @@ public class PickPlanFragment extends Fragment {
                 Object item = adapterView.getItemAtPosition(position);
                 if(item != null) {
                     String s = item.toString();
-                    spinners_choose.add(s);
+                    spinners_choose.put("semester",s);
                 }
             }
             @Override
@@ -132,7 +139,7 @@ public class PickPlanFragment extends Fragment {
                 Object item = adapterView.getItemAtPosition(position);
                 if(item != null) {
                     String s = item.toString();
-                    spinners_choose.add(s);
+                    spinners_choose.put("group",s);
                 }
             }
             @Override
@@ -155,7 +162,7 @@ public class PickPlanFragment extends Fragment {
                 Object item = adapterView.getItemAtPosition(position);
                 if(item != null) {
                     String s = item.toString();
-                    spinners_choose.add(s);
+                    spinners_choose.put("subgroup",s);
                 }
             }
             @Override
@@ -172,14 +179,22 @@ public class PickPlanFragment extends Fragment {
         Button button_add_plan = v.findViewById(R.id.add_plan_button);
         button_add_plan.setOnClickListener(v1 -> {
 
-            DayOfWeekFragment dayOfWeekFragment = new DayOfWeekFragment ();
-            Bundle bundle1 = new Bundle();
-            bundle1.putStringArrayList("user_plan", spinners_choose);
+            //DayOfWeekFragment dayOfWeekFragment = new DayOfWeekFragment ();
+            //  Bundle bundle1 = new Bundle();
+            // bundle1.putStringArrayList("user_plan", spinners_choose);
             //dayOfWeekFragment.setArguments(bundle1);
-            getFragmentManager().beginTransaction().add(R.id.container, dayOfWeekFragment).commit();
+            // getFragmentManager().beginTransaction().add(R.id.container, dayOfWeekFragment).commit();
             //someEventListener.someEvent(spinners_choose);
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+
+            SharedPreferences.Editor preference = getActivity().getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit();
+            Set<String> keySet = spinners_choose.keySet();
+            for(String key: keySet) {
+                preference.putString(key, spinners_choose.get(key));
+            }
+            preference.apply();
+            getActivity().finish();
+            /*Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);*/
         });
 
         return v;

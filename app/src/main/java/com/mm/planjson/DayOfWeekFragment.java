@@ -1,8 +1,11 @@
 package com.mm.planjson;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,43 +24,24 @@ public class DayOfWeekFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_day_of_week, container, false);
+        if(getActivity() instanceof MainActivity) {
+            MainActivity activity = (MainActivity) getActivity();
+            Context applicationContext = activity.getApplicationContext();
+            Bundle bundle = this.getArguments();
+            SharedPreferences preference = applicationContext.getSharedPreferences("PREFERENCE", applicationContext.MODE_PRIVATE);
 
-        Bundle bundle = this.getArguments();
-        Bundle bundle1 = this.getArguments();
-        ArrayList<String> user_choice = bundle1.getStringArrayList("user_plan");
-        ReadJson read = new ReadJson(getActivity().getApplicationContext());
+            ReadJson read = activity.getReadJson();
 
-        recyclerView = v.findViewById(R.id.recycler_view_plan);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if(bundle != null){
-            String adapter = bundle.getString("adapter");
-            switch (adapter) {
-                case "0": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(1, user_choice.get(3), "right"));
-                    recyclerView.setAdapter(mAdapter);
-                    break;
-                }
-                case "1": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(2, user_choice.get(3), "right"));
-                    recyclerView.setAdapter(mAdapter);
-                    break;
-                }
-                case "2": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(3, user_choice.get(3), "right"));
-                    recyclerView.setAdapter(mAdapter);
-                    break;
-                }
-                case "3": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(4, user_choice.get(3), "right"));
-                    recyclerView.setAdapter(mAdapter);
-                    break;
-                }
-                case "4": {
-                    mAdapter = new PlanAdapter(read.restoreFromJson(5, user_choice.get(3), "right"));
-                    recyclerView.setAdapter(mAdapter);
-                    break;
-                }
+            recyclerView = v.findViewById(R.id.recycler_view_plan);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+            if (bundle != null) {
+                String adapter = bundle.getString("adapter");
+                String group = preference.getString("group", "0");
+                String subgroup = preference.getString("subgroup", "0");
+                Integer day = Integer.valueOf(adapter) + 1;
+                mAdapter = new PlanAdapter(read.restoreFromJson(day, group, subgroup));
+                recyclerView.setAdapter(mAdapter);
             }
         }
         return v;

@@ -1,9 +1,15 @@
 package com.mm.planjson;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -24,12 +30,13 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-
+    private ReadJson readJson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putBoolean("isFirstRun", false).apply();
         }
-
         //navigation
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,51 +70,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //tablayout
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
-
+        readJson = new ReadJson(this);
         ArrayList<String> weekDays = new ArrayList<>();
         weekDays.add("Monday");
         weekDays.add("Tuesday");
         weekDays.add("Wednesday");
         weekDays.add("Thursday");
         weekDays.add("Friday");
-
         prepareViewPager(viewPager, weekDays);
         tabLayout.setupWithViewPager(viewPager);
 
+    }
 
+    public ReadJson getReadJson() {
+        return readJson;
     }
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> weekDays) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        DayOfWeekFragment fragment = new DayOfWeekFragment();
+
 
         for (int i = 0; i < weekDays.size(); i++) {
+            DayOfWeekFragment fragment = new DayOfWeekFragment();
             Bundle bundle = new Bundle();
-            switch (i) {
-                case 0: {
-                    bundle.putString("adapter", "0");
-                    break;
-                }
-                case 1: {
-                    bundle.putString("adapter", "1");
-                    break;
-                }
-                case 2: {
-                    bundle.putString("adapter", "2");
-                    break;
-                }
-                case 3: {
-                    bundle.putString("adapter", "3");
-                    break;
-                }
-                case 4: {
-                    bundle.putString("adapter", "4");
-                    break;
-                }
-            }
+            bundle.putString("adapter", String.valueOf(i));
             fragment.setArguments(bundle);
             adapter.addFragment(fragment, weekDays.get(i));
-            fragment = new DayOfWeekFragment();
+            //  fragment = new DayOfWeekFragment();
         }
         viewPager.setAdapter(adapter);
     }
@@ -121,7 +109,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 onBackPressed();
                 break;
             case R.id.nav_chat:
-
+                intent = new Intent(MainActivity.this, ChangeScheduleActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_profile:
 
