@@ -67,8 +67,6 @@ public class ReadJson {
                     if (lesson.getSchedule().get(k).getWeeks().equals("odd") && odd_week){
                         weeks = "odd";
                     }else weeks = "even";
-                    //if ((lesson.getSchedule().get(k).getGroup().equals(group) && (lesson.getSchedule().get(k).getSubgroup().equals(subgroup))) ||
-                     //       (lesson.getSchedule().get(k).getGroup().equals("all") && (lesson.getSchedule().get(k).getSubgroup().equals("all")))) {
                     if ((lesson.getSchedule().get(k).getGroup().equals(group) && (lesson.getSchedule().get(k).getSubgroup().equals(subgroup)) && ((lesson.getSchedule().get(k).getWeeks().equals("all")) || lesson.getSchedule().get(k).getWeeks().equals(weeks))) ||
                             (lesson.getSchedule().get(k).getGroup().equals("all") && (lesson.getSchedule().get(k).getSubgroup().equals("all")) && ((lesson.getSchedule().get(k).getWeeks().equals("all")) || lesson.getSchedule().get(k).getWeeks().equals(weeks)))) {
 
@@ -91,6 +89,142 @@ public class ReadJson {
         return schedule_plan;
     }
 
+    public ArrayList<PlanItem> getSupervisorPlan(int day, String supervisor) {
+
+        Courses course;
+        Lessons lesson;
+        Schedule schedule;
+        ArrayList<PlanItem> tmp = new ArrayList<>();
+        ArrayList<PlanItem> schedule_supervisor = new ArrayList<>();
+        boolean odd_week = true;
+        String weeks;
+        Calendar calender = Calendar.getInstance();
+        int week_number = calender.get(Calendar.WEEK_OF_YEAR);
+        if (week_number % 2 == 0){
+            odd_week = false;
+        }
+
+        for (int i = 0; i < plan.getCourses().size(); i++) {
+            course = plan.getCourses().get(i);
+            for (int j = 0; j < course.getaClasses().size(); j++) {
+                lesson = course.getaClasses().get(j);
+                for (int k = 0; k < lesson.getSchedule().size(); k++) {
+                    if (lesson.getSchedule().get(k).getWeeks().equals("odd") && odd_week){
+                        weeks = "odd";
+                    }else weeks = "even";
+
+                    if (lesson.getSupervisor().equals(supervisor)  && ((lesson.getSchedule().get(k).getWeeks().equals("all")) || lesson.getSchedule().get(k).getWeeks().equals(weeks))) {
+
+                        schedule = lesson.getSchedule().get(k);
+                        tmp.add(new PlanItem(schedule.getStartTime(), course.getName(), lesson.getSupervisor(), lesson.getRoom(), schedule.getDay(), schedule.getGroup(), schedule.getSubgroup(), schedule.getWeeks()));
+
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.get(i).getDay() == day){
+                schedule_supervisor.add(tmp.get(i));
+            }
+        }
+
+        Collections.sort(schedule_supervisor, PlanItem.StuNameComparator);
+
+        return schedule_supervisor;
+    }
+
+    public ArrayList<PlanItem> getCoursePlan(int day, String courseName) {
+
+        Courses course;
+        Lessons lesson;
+        Schedule schedule;
+        ArrayList<PlanItem> tmp = new ArrayList<>();
+        ArrayList<PlanItem> schedule_course = new ArrayList<>();
+        boolean odd_week = true;
+        String weeks;
+        Calendar calender = Calendar.getInstance();
+        int week_number = calender.get(Calendar.WEEK_OF_YEAR);
+        if (week_number % 2 == 0){
+            odd_week = false;
+        }
+
+        for (int i = 0; i < plan.getCourses().size(); i++) {
+            course = plan.getCourses().get(i);
+            for (int j = 0; j < course.getaClasses().size(); j++) {
+                lesson = course.getaClasses().get(j);
+                for (int k = 0; k < lesson.getSchedule().size(); k++) {
+                    if (lesson.getSchedule().get(k).getWeeks().equals("odd") && odd_week){
+                        weeks = "odd";
+                    }else weeks = "even";
+
+                    if (course.getName().equals(courseName)  && ((lesson.getSchedule().get(k).getWeeks().equals("all")) || lesson.getSchedule().get(k).getWeeks().equals(weeks))) {
+
+                        schedule = lesson.getSchedule().get(k);
+                        tmp.add(new PlanItem(schedule.getStartTime(), course.getName(), lesson.getSupervisor(), lesson.getRoom(), schedule.getDay(), schedule.getGroup(), schedule.getSubgroup(), schedule.getWeeks()));
+
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.get(i).getDay() == day){
+                schedule_course.add(tmp.get(i));
+            }
+        }
+
+        Collections.sort(schedule_course, PlanItem.StuNameComparator);
+
+        return schedule_course;
+    }
+
+    public ArrayList<PlanItem> getRoomPlan(int day, String room) {
+
+        Courses course;
+        Lessons lesson;
+        Schedule schedule;
+        ArrayList<PlanItem> tmp = new ArrayList<>();
+        ArrayList<PlanItem> schedule_room = new ArrayList<>();
+        boolean odd_week = true;
+        String weeks;
+        Calendar calender = Calendar.getInstance();
+        int week_number = calender.get(Calendar.WEEK_OF_YEAR);
+        if (week_number % 2 == 0){
+            odd_week = false;
+        }
+
+        for (int i = 0; i < plan.getCourses().size(); i++) {
+            course = plan.getCourses().get(i);
+            for (int j = 0; j < course.getaClasses().size(); j++) {
+                lesson = course.getaClasses().get(j);
+                for (int k = 0; k < lesson.getSchedule().size(); k++) {
+                    if (lesson.getSchedule().get(k).getWeeks().equals("odd") && odd_week){
+                        weeks = "odd";
+                    }else weeks = "even";
+
+                    if (lesson.getRoom().equals(room)  && ((lesson.getSchedule().get(k).getWeeks().equals("all")) || lesson.getSchedule().get(k).getWeeks().equals(weeks))) {
+
+                        schedule = lesson.getSchedule().get(k);
+                        tmp.add(new PlanItem(schedule.getStartTime(), course.getName(), lesson.getSupervisor(), lesson.getRoom(), schedule.getDay(), schedule.getGroup(), schedule.getSubgroup(), schedule.getWeeks()));
+
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.get(i).getDay() == day){
+                schedule_room.add(tmp.get(i));
+            }
+        }
+
+        Collections.sort(schedule_room, PlanItem.StuNameComparator);
+
+        return schedule_room;
+    }
+
+//Picking schedule for subgroup
 
     public ArrayList<String> getDepartment() {
         department.add("Computing and Telecommunications");

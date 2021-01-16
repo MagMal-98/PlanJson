@@ -3,6 +3,7 @@ package com.mm.planjson;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,13 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanViewHolder
 
     private ArrayList<PlanItem> mPlanList;
 
-    public static class PlanViewHolder extends RecyclerView.ViewHolder {
+    public static class PlanViewHolder extends RecyclerView.ViewHolder{
 
         public TextView textViewHour;
         public TextView textViewName;
         public TextView textViewSupervisor;
         public TextView textViewRoom;
+
 
         public PlanViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +57,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.PlanViewHolder
     public int getItemCount() {
         return mPlanList.size();
     }
+
 }
 
 

@@ -88,12 +88,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void prepareViewPager(ViewPager viewPager, ArrayList<String> weekDays) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-
+        String supervisor = getIntent().getStringExtra("supervisor");
+        String room = getIntent().getStringExtra("room");
+        String course = getIntent().getStringExtra("course");
 
         for (int i = 0; i < weekDays.size(); i++) {
             DayOfWeekFragment fragment = new DayOfWeekFragment();
             Bundle bundle = new Bundle();
             bundle.putString("adapter", String.valueOf(i));
+            bundle.putString("supervisor", supervisor);
+            bundle.putString("room", room);
+            bundle.putString("course", course);
+//            SharedPreferences.Editor preference = getSharedPreferences("PREFERENCEOPTIONS", MODE_PRIVATE).edit();
+//            preference.putString("adapter", String.valueOf(adapter));
+//            preference.apply();
             fragment.setArguments(bundle);
             adapter.addFragment(fragment, weekDays.get(i));
             //  fragment = new DayOfWeekFragment();
