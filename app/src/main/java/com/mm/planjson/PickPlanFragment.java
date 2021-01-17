@@ -177,7 +177,7 @@ public class PickPlanFragment extends Fragment {
 
 
         Button button_add_plan = v.findViewById(R.id.add_plan_button);
-        button_add_plan.setOnClickListener(v1 -> {
+        button_add_plan.setOnClickListener((View v1) -> {
 
             //DayOfWeekFragment dayOfWeekFragment = new DayOfWeekFragment ();
             //  Bundle bundle1 = new Bundle();
