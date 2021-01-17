@@ -26,6 +26,7 @@ public class DayOfWeekFragment extends Fragment {
     String supervisor;
     String room;
     String name;
+    int weekDay;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +79,7 @@ public class DayOfWeekFragment extends Fragment {
                             supervisor = arrayList.get(position).getSupervisor();
                             room = arrayList.get(position).getRoom();
                             name = arrayList.get(position).getName();
+                            weekDay = arrayList.get(position).getDay();
 
                         }
 
@@ -86,7 +88,8 @@ public class DayOfWeekFragment extends Fragment {
                         intent.putExtra("courseName", name);
                         intent.putExtra("supervisor", supervisor);
                         intent.putExtra("room", room);
-                        //intent.putExtra("courseName", name);
+                        intent.putExtra("hour", hour);
+                        intent.putExtra("weekDay", weekDay);
                         startActivity(intent);
                         //Toast.makeText(getContext(), name + " "+ supervisor + " " + room + " "+ hour, Toast.LENGTH_LONG).show();
                     }

@@ -14,7 +14,7 @@
         android:id="@+id/text_view_pick_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Pick schedule"
         android:textSize="20sp"
         android:textAlignment="center"
@@ -55,20 +55,50 @@
         android:id="@+id/text_view_set_schedule_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:text="Set notification"
         android:textAlignment="center"
         android:textSize="20sp"
         />
 
-    <Switch
-        android:id="@+id/switch_cyclic_notifications"
+    <TextView
+        android:id="@+id/text_view_lesson_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Cyclic notifications"
-        tools:ignore="UseSwitchCompatOrMaterialXml"
-        android:layout_marginHorizontal="10dp"/>
+        android:hint="Set Date"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:id="@+id/button_lesson_date"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="get date" />
+
+    <TextView
+        android:id="@+id/text_view_lesson_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Set Time"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        />
+
+    <Button
+        android:id="@+id/button_lesson_time"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="get time" />
 
     <Button
         android:id="@+id/button_set_notification_schedule"

@@ -1,8 +1,11 @@
 package com.mm.planjson;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.GestureDetector;
@@ -79,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         weekDays.add("Friday");
         prepareViewPager(viewPager, weekDays);
         tabLayout.setupWithViewPager(viewPager);
+
+        createChannel();
 
     }
 
@@ -179,6 +184,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public CharSequence getPageTitle(int position) {
             return arrayList.get(position);
+        }
+    }
+
+    public void createChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // For API 26 and above
+            CharSequence channelName = "ePlan Notification";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel channel = new NotificationChannel(AlarmReceiverLesson.CHANNEL_ID, channelName, importance);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }
